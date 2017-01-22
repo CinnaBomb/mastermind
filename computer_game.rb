@@ -38,10 +38,8 @@ class ComputerGame
 	def check_guess
 		if @guess == @code
 			puts "Wow the computer is smart!"
-		elsif @guess.any?{|color| @code.include?(color)}
-			code_hints
 		else
-			puts "None of the computer's guesses were the right colors"
+			code_hints
 		end
 	end
 

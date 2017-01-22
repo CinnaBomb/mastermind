@@ -26,8 +26,6 @@ class Game
 				break if choice == "guess" || choice == "create" || choice == "q"
 			end
 
-
-
 			if choice == "guess"
 				game = PlayerGame.new.play
 			elsif choice == "create"
