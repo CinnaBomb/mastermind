@@ -1,4 +1,4 @@
-class Game
+class PlayerGame
 	def initialize
 		@colors = ["red", "blue", "yellow", "green", "purple", "orange"]
 		@guess_count = 0
@@ -7,9 +7,9 @@ class Game
 
 	def new_code
 		@code = []
-		#4.times {@code << @colors.sample}
-		@code = ["orange", "red", "green", "red"]
-		puts @code.inspect
+		4.times {@code << @colors.sample}
+		#@code = ["orange", "red", "green", "red"]
+		#puts @code.inspect
 	end
 
 	def player_guess
@@ -23,7 +23,6 @@ class Game
 		exit if @guess == ['q']
 		check_guess
 		@guess_count +=1
-		puts "______________________________________"
 	end
 
 	def computer_guess
@@ -47,13 +46,11 @@ class Game
 	end
 
 	def code_hints
-		#puts @code.inspect
 		temp_code = [].replace(@code)
 		temp_guess = [].replace(@guess)
-		#puts temp_code.inspect
-		#puts @code.inspect
 		correct_color_and_position = 0
 		correct_color_wrong_position = 0
+		#CHECK FOR CORRECT COLORS IN CORRECT POSITIONS
 		for i in 0...temp_guess.length
 			if temp_guess[i] == temp_code[i]
 				correct_color_and_position +=1
@@ -61,6 +58,7 @@ class Game
 				temp_guess[i] = "guess"
 			end
 		end
+		#CHECK FOR CORRECT COLORS IN WRONG POSITIONS
 		for i in 0...temp_guess.length
 			if temp_code.include?(temp_guess[i])
 				correct_color_wrong_position +=1
@@ -84,7 +82,6 @@ class Game
 			false
 		end
 	end
-
 
 	def play
 		how_to_play
@@ -110,4 +107,3 @@ class Game
 	end
 end
 
-game = Game.new.play
