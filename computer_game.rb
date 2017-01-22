@@ -68,7 +68,7 @@ class ComputerGame
 				@guess[i] = false
 			end
 		end
-		puts @guess.inspect
+		#puts @guess.inspect
 		puts "The computer has #{correct_color_and_position} colors in their correct positions."
 		puts "The computer has #{correct_color_wrong_position} correct colors in the wrong positions."
 
