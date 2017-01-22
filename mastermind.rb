@@ -7,20 +7,23 @@ class Game
 
 	def new_code
 		@code = []
-		4.times {@code << @colors.sample}
-		#puts @code.inspect
-		#puts "[][][][]"
+		#4.times {@code << @colors.sample}
+		@code = ["orange", "red", "green", "red"]
+		puts @code.inspect
 	end
 
 	def player_guess
+		puts "You have #{@max_guess_count-@guess_count} guesses left"
 		puts "Colors to choose from are #{@colors.join(", ")}"
+		puts "______________________________________"
 		loop do 
 			@guess = gets.downcase.chomp.split(" ")
 			break if @guess == ['q'] || valid_guess
 		end
 		exit if @guess == ['q']
-			check_guess
-			@guess_count +=1
+		check_guess
+		@guess_count +=1
+		puts "______________________________________"
 	end
 
 	def computer_guess
@@ -37,10 +40,34 @@ class Game
 		if @guess == @code
 			puts "Wow you are smart!"
 		elsif @guess.any?{|color| @code.include?(color)}
-			puts "Some of your guesses are close "
+			code_hints
 		else
 			puts "None of your guesses were the right colors"
 		end
+	end
+
+	def code_hints
+		#puts @code.inspect
+		temp_code = [].replace(@code)
+		temp_guess = [].replace(@guess)
+		#puts temp_code.inspect
+		#puts @code.inspect
+		correct_color_and_position = 0
+		correct_color_wrong_position = 0
+		for i in 0...temp_guess.length
+			if temp_guess[i] == temp_code[i]
+				correct_color_and_position +=1
+				temp_code[i] = "code"
+				temp_guess[i] = "guess"
+			end
+		end
+		for i in 0...temp_guess.length
+			if temp_code.include?(temp_guess[i])
+				correct_color_wrong_position +=1
+			end
+		end
+		puts "You have #{correct_color_and_position} colors in their correct positions."
+		puts "You have #{correct_color_wrong_position} correct colors in the wrong positions."
 
 	end
 
